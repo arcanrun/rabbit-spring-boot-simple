@@ -1,6 +1,6 @@
 package com.arcanrun.rabbitmq.controller;
 
-import com.arcanrun.rabbitmq.rabbitmq.Sender;
+import com.arcanrun.rabbitmq.rabbitmq.RabbitMQSender;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,10 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/rabbit")
 public class RabbitController {
 
-    private final Sender sender;
+    private final RabbitMQSender sender;
 
-    @PostMapping("/simple-message")
-    public void sendMessage(@RequestBody String message) {
-        sender.sendMessage(message);
+
+    @PostMapping("/default-exchange")
+    public void sendMessageDefaultExchange(@RequestBody String message) {
+        sender.sendMessageToDefaultExchange(message);
+    }
+
+    @PostMapping("/fanout")
+    public void sendMessageFanout(@RequestBody String message) {
+        sender.sendMessageFanout(message);
     }
 }

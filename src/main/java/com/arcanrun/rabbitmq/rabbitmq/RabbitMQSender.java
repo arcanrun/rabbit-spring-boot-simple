@@ -4,14 +4,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
+import static com.arcanrun.rabbitmq.config.RabbitMQConfig.HELLO_FANOUT_EXCHANGE;
 import static com.arcanrun.rabbitmq.config.RabbitMQConfig.HELLO_QUEUE_NAME;
 
 @Component
 @RequiredArgsConstructor
-public class Sender {
+public class RabbitMQSender {
     private final RabbitTemplate rabbitTemplate;
 
-    public void sendMessage(String message) {
+    public void sendMessageToDefaultExchange(String message) {
         rabbitTemplate.convertAndSend(HELLO_QUEUE_NAME, message);
+    }
+
+    public void sendMessageFanout(String message) {
+        rabbitTemplate.convertAndSend(HELLO_FANOUT_EXCHANGE, "", message);
     }
 }

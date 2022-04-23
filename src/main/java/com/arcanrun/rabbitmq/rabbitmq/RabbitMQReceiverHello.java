@@ -10,7 +10,7 @@ import static com.arcanrun.rabbitmq.config.RabbitMQConfig.HELLO_QUEUE_NAME;
 @Slf4j
 @Component
 @RabbitListener(queues = HELLO_QUEUE_NAME)
-public class Receiver {
+public class RabbitMQReceiverHello {
 
     @RabbitHandler
     public void receive(String message) {
