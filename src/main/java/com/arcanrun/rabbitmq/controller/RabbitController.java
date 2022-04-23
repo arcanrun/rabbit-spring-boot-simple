@@ -2,6 +2,7 @@ package com.arcanrun.rabbitmq.controller;
 
 import com.arcanrun.rabbitmq.rabbitmq.RabbitMQSender;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,5 +24,10 @@ public class RabbitController {
     @PostMapping("/fanout")
     public void sendMessageFanout(@RequestBody String message) {
         sender.sendMessageFanout(message);
+    }
+
+    @PostMapping("/direct/{routingKey}")
+    public void sendMessageWithRoutingKey(@RequestBody String message, @PathVariable String routingKey) {
+        sender.sendMessageWithRoutingKey(message, routingKey);
     }
 }
