@@ -2,6 +2,7 @@ package com.arcanrun.rabbitmq.config;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.Declarables;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.Queue;
@@ -97,18 +98,16 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public Binding bindingByeTopic() {
-        return BindingBuilder
-                .bind(byeQueue())
-                .to(helloTopicExchange())
-                .with("*.bar.baz");
-    }
-
-    @Bean
-    public Binding bindingByeTopic2() {
-        return BindingBuilder
+    public Declarables bindingByeTopic2() {
+        var binding = BindingBuilder
                 .bind(byeQueue())
                 .to(helloTopicExchange())
                 .with("#.bar.baz");
+        var binding2 = BindingBuilder
+                .bind(byeQueue())
+                .to(helloTopicExchange())
+                .with("*.bar.baz");
+
+        return new Declarables(binding, binding2);
     }
 }
