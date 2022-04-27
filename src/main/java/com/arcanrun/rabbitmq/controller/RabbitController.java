@@ -1,6 +1,7 @@
 package com.arcanrun.rabbitmq.controller;
 
 import com.arcanrun.rabbitmq.rabbitmq.RabbitMQSender;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/rabbit")
+@Api(tags = "Rabbit controller")
 public class RabbitController {
 
     private final RabbitMQSender sender;
