@@ -7,3 +7,9 @@ spring:
     username: admin
     password: admin
     driver-class-name: org.h2.Driver
+  rabbitmq:
+    username: ${RABBITMQ_USERNAME:user}
+    password: ${RABBITMQ_PASSWORD:user}
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBTMQ_PORT:5672}
+    virtual-host: ${RABBITMQ_VHOST:wallet}
